@@ -11,5 +11,6 @@ roleRef:
   kind: ClusterRole
   name: argocd-appsource-controller
 subjects:
-- kind: ServiceAccount
-  name: argocd-appsource-controller
+  - kind: ServiceAccount
+    name: argocd-appsource-controller
+    namespace: argocd
