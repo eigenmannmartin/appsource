@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: argocd-appsource-controller
-  namespace: system
   labels:
     app.kubernetes.io/name: argocd-appsource-controller
     app.kubernetes.io/part-of: argocd-appsource
@@ -22,16 +21,16 @@ spec:
       #     configMap:
       #       name: argocd-appsource-cm
       containers:
-      - command:
-        - /manager
-        image: quay.io/argoprojlabs/argocd-appsource:latest
-        imagePullPolicy: Always
-        name: manager
-        env:
-        - name: ARGOCD_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: argocd-appsource-secret
-              key: argocd-token
+        - command:
+            - /manager
+          image: quay.io/argoprojlabs/argocd-appsource:latest
+          imagePullPolicy: Always
+          name: manager
+          env:
+            - name: ARGOCD_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: argocd-appsource-secret
+                  key: argocd-token
 
       serviceAccountName: argocd-appsource-controller
